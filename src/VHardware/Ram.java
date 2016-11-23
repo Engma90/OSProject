@@ -9,6 +9,6 @@ package VHardware;
  *
  * @author MR.ROBOT
  */
-public class Memory {
+public class Ram {
     
 }
