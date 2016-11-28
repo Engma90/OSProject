@@ -5,19 +5,15 @@
  */
 package GUI;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 import javazoom.jl.player.advanced.PlaybackEvent;
 import javazoom.jl.player.advanced.PlaybackListener;
-import static sun.audio.AudioPlayer.player;
 
 
 /**
@@ -115,9 +111,7 @@ public class MusicPlayer extends javax.swing.JFrame {
                 }
             });
             player.play();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(MusicPlayer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (JavaLayerException ex) {
+        } catch (FileNotFoundException | JavaLayerException ex) {
             Logger.getLogger(MusicPlayer.class.getName()).log(Level.SEVERE, null, ex);
         }
   
