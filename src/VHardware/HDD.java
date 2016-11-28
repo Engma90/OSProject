@@ -17,7 +17,7 @@ public class HDD {
     public HDD(){
         File HD=new File(location);
         System.out.println(location);
-        System.out.println(HD.isDirectory());//
+        System.out.println(HD.isDirectory());////
     }
     
     
