@@ -6,15 +6,14 @@
 package GUI;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.advanced.AdvancedPlayer;
-import javazoom.jl.player.advanced.PlaybackEvent;
-import javazoom.jl.player.advanced.PlaybackListener;
- 
+import java.io.IOException;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -25,12 +24,127 @@ public class MusicPlayer extends javax.swing.JFrame {
     /**
      * Creates new form MusicPlayer
      */
+    private String Path;
+    private final int BUFFER_SIZE = 64;
+    private File soundFile;
+    private AudioInputStream audioStream;
+    private AudioFormat audioFormat;
+    private SourceDataLine sourceLine;
+    private Thread thread;
+    private int curruntPossision = 0;
+    private int total = 0;
+
     public MusicPlayer() {
+
         initComponents();
+        Path = new File("").getAbsolutePath() + "/HDD/1.wav";
     }
-    String Path;
-    public MusicPlayer(String Path){
-        this.Path=Path;
+
+    public MusicPlayer(String Path) {
+        initComponents();
+        this.Path = Path;
+    }
+
+    
+
+    /**
+     * @param filename the name of the file that is going to be played
+     */
+    public void playSound(String filename) {
+        stop = false;
+        thread = new Thread(() -> {
+            String strFilename = filename;
+
+            try {
+                soundFile = new File(strFilename);
+            } catch (Exception e) {
+                System.exit(1);
+            }
+
+            try {
+                audioStream = AudioSystem.getAudioInputStream(soundFile);
+            } catch (UnsupportedAudioFileException | IOException e) {
+                System.exit(1);
+            }
+//                try {
+//                    if(curruntPossision==0)
+//                    curruntPossision=audioStream.available();
+//                } catch (IOException ex) {
+//                    Logger.getLogger(MakeSound.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+
+            audioFormat = audioStream.getFormat();
+
+            DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFormat);
+            try {
+                sourceLine = (SourceDataLine) AudioSystem.getLine(info);
+                sourceLine.open(audioFormat);
+            } catch (LineUnavailableException e) {
+                System.exit(1);
+            } catch (Exception e) {
+                System.exit(1);
+            }
+            try {
+                audioStream.skip(curruntPossision);
+            } catch (IOException ex) {
+
+            }
+            sourceLine.start();
+
+            try {
+                if (curruntPossision == 0) {
+                    total = audioStream.available();
+                    jProgressBar1.setMaximum(total);
+                }
+            } catch (IOException ex) {
+
+            }
+
+            int nBytesRead = 0;
+            byte[] abData = new byte[BUFFER_SIZE];
+            while (nBytesRead != -1) {
+                if (stop) {
+                    return;
+                }
+
+                try {
+                    curruntPossision = total - audioStream.available();
+                    //System.out.println(curruntPossision);
+                    jProgressBar1.setValue(curruntPossision);
+                } catch (IOException ex) {
+
+                }
+                try {
+                    nBytesRead = audioStream.read(abData, 0, abData.length);
+                } catch (IOException e) {
+                }
+                if (nBytesRead >= 0) {
+                    @SuppressWarnings("unused")
+                    int nBytesWritten = sourceLine.write(abData, 0, nBytesRead);
+                }
+            }
+            try {
+                System.out.println(audioStream.available());
+            } catch (IOException ex) {
+
+            }
+            release();
+        });
+        thread.start();
+    }
+    boolean stop = false;
+
+    public void Stop() {
+        stop = true;
+    }
+
+    public void release() {
+        stop = true;
+        sourceLine.stop();
+        sourceLine.drain();
+        sourceLine.close();
+        curruntPossision = 0;
+        jProgressBar1.setValue(0);
     }
 
     /**
@@ -45,24 +159,39 @@ public class MusicPlayer extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Music Player");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
         });
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Play");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Pause");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("jButton3");
+        jButton3.setText("Stop");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,16 +200,22 @@ public class MusicPlayer extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jButton1)
-                .addGap(33, 33, 33)
+                .addGap(37, 37, 37)
                 .addComponent(jButton2)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jButton3)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(57, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton2)
@@ -90,34 +225,38 @@ public class MusicPlayer extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-  
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-         
 
-        
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+        playSound(Path);
+
     }//GEN-LAST:event_formWindowOpened
-        static int pausedOnFrame = 0;
-        
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            FileInputStream fis;
-            
-            fis=new FileInputStream(new File(new File("").getAbsolutePath()+"/HDD/1.mp3"));
-            AdvancedPlayer player = new AdvancedPlayer(fis);
-            player.setPlayBackListener(new PlaybackListener() {
-                @Override
-                public void playbackFinished(PlaybackEvent event) {
-                    pausedOnFrame = event.getFrame();
-                }
-            });
-            player.play();
-        } catch (FileNotFoundException | JavaLayerException ex) {
-            Logger.getLogger(MusicPlayer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-  
-         
+        playSound(Path);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        Stop();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        release();
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        release();
+    }//GEN-LAST:event_formWindowClosing
+
+//    public void play() {
+//        try {
+//            player.play(pausedOnFrame);
+//        } catch (JavaLayerException ex) {
+//            Logger.getLogger(MusicPlayer.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     /**
      * @param args the command line arguments
      */
@@ -146,16 +285,15 @@ public class MusicPlayer extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MusicPlayer().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MusicPlayer().setVisible(true);
         });
-    } 
-  
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
 }
