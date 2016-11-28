@@ -143,7 +143,7 @@ public class FileManager extends javax.swing.JFrame {
                     }
                     else if("mp3".equals(name.split("\\.")[1])){
                         MusicPlayer mp=new MusicPlayer(jTextField1.getText() + "/" + name);
-                        //mp.setSize(500, 500);
+                        mp.setSize(500, 500);
                         mp.setVisible(true);
                     }
 
