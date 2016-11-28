@@ -7,6 +7,10 @@ package GUI;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -25,9 +29,19 @@ public class DT extends javax.swing.JFrame {
         initComponents();
         setLayout(null); // :-)
         PicPanel mainPanel = new PicPanel("/resources/kali_linux_wallpaper__i_am_free___2_by_salvoru87-d87y9p9.jpg");
-        mainPanel.setBounds(0,0,1200,650);
-          
+        mainPanel.setBounds(0, 0, 1200, 650);
+        
         add(mainPanel);
+
+        jLabel1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    FileManager fm =new FileManager();
+                    fm.setVisible(true);
+                }
+            }
+        });
     }
 
     /**
@@ -92,66 +106,66 @@ public class DT extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(DT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DT dt=new DT();
+                DT dt = new DT();
                 dt.setSize(new Dimension(1200, 650));
                 dt.setResizable(false);
+                
+                dt.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowActivated(WindowEvent e) {
+                    //dt.setAlwaysOnTop(true);
+                    dt.toBack();
+                }
+            });
+                
                 dt.setVisible(true);
             }
         });
     }
 
+    class PicPanel extends JPanel {
 
+        private BufferedImage image;
+        private int w, h;
 
+        public PicPanel(String fname) {
 
+            //reads the image
+            try {
+                image = ImageIO.read(getClass().getResource(fname));
+                w = image.getWidth();
+                h = image.getHeight();
 
+            } catch (IOException ioe) {
+                System.out.println("Could not read in the pic");
+                //System.exit(0);
+            }
 
-  
-    
-     class PicPanel extends JPanel{
+        }
 
-private BufferedImage image;
-private int w,h;
-public PicPanel(String fname){
-
-    //reads the image
-    try {
-        image = ImageIO.read(getClass().getResource(fname));
-        w = image.getWidth();
-        h = image.getHeight();
-
-    } catch (IOException ioe) {
-        System.out.println("Could not read in the pic");
-        //System.exit(0);
-    }
-
-}
-
-@Override
-public Dimension getPreferredSize() {
-    return new Dimension(w,h);
-}
+        @Override
+        public Dimension getPreferredSize() {
+            return new Dimension(w, h);
+        }
 //this will draw the image
-@Override
-public void paintComponent(Graphics g){
-    super.paintComponent(g);
-    g.drawImage(image,0,0,this);
-}
+
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(image, 0, 0, this);
+        }
 
 //@Override
 //public boolean isOptimizedDrawingEnabled(){
 //    return false;
 //}
- 
+    }
 
-}
-    
-    
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
