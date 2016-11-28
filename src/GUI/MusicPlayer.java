@@ -10,10 +10,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.advanced.AdvancedPlayer;
-import javazoom.jl.player.advanced.PlaybackEvent;
-import javazoom.jl.player.advanced.PlaybackListener;
+//import javazoom.jl.decoder.JavaLayerException;
+//import javazoom.jl.player.advanced.AdvancedPlayer;
+//import javazoom.jl.player.advanced.PlaybackEvent;
+//import javazoom.jl.player.advanced.PlaybackListener;
  
 
 /**
@@ -99,21 +99,21 @@ public class MusicPlayer extends javax.swing.JFrame {
         static int pausedOnFrame = 0;
         
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            FileInputStream fis;
-            
-            fis=new FileInputStream(new File(new File("").getAbsolutePath()+"/HDD/1.mp3"));
-            AdvancedPlayer player = new AdvancedPlayer(fis);
-            player.setPlayBackListener(new PlaybackListener() {
-                @Override
-                public void playbackFinished(PlaybackEvent event) {
-                    pausedOnFrame = event.getFrame();
-                }
-            });
-            player.play();
-        } catch (FileNotFoundException | JavaLayerException ex) {
-            Logger.getLogger(MusicPlayer.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            FileInputStream fis;
+//            
+//            fis=new FileInputStream(new File(new File("").getAbsolutePath()+"/HDD/1.mp3"));
+//            AdvancedPlayer player = new AdvancedPlayer(fis);
+//            player.setPlayBackListener(new PlaybackListener() {
+//                @Override
+//                public void playbackFinished(PlaybackEvent event) {
+//                    pausedOnFrame = event.getFrame();
+//                }
+//            });
+//            player.play();
+//        } catch (FileNotFoundException | JavaLayerException ex) {
+//            Logger.getLogger(MusicPlayer.class.getName()).log(Level.SEVERE, null, ex);
+//        }
   
          
     }//GEN-LAST:event_jButton1ActionPerformed
