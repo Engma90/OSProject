@@ -5,21 +5,14 @@
  */
 package VHardware;
 
-import java.io.File;
-
 /**
  *
  * @author Sniper
  */
-public class HDD {
-    public final String location=new File("").getAbsolutePath()+"/HDD";
-    
-    public HDD(){
+public class VHMain {
+    public static void main(String[] args) {
+        HDD HD =new HDD();
         
     }
-    
-    
- 
-    
     
 }

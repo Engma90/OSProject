@@ -11,4 +11,22 @@ package VHardware;
  */
 public class Ram {
     
+    private final String[] ramChip=new String[10];
+    
+    public Ram(){
+        
+    }
+    
+    public void uploadToRam(int location,String content){
+        
+        ramChip[location]=content;
+        
+    }
+    
+    public String downloadFromRam(int location){
+        
+        return ramChip[location];
+        
+    }
+    
 }
