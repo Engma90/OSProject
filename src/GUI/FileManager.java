@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
-
+ 
 import VHardware.HDD;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Sniper
  */
 public class FileManager extends javax.swing.JFrame {
-
+ 
     /**
      * Creates new form FileManager
      */
@@ -140,6 +140,11 @@ public class FileManager extends javax.swing.JFrame {
                         TextEditor te=new TextEditor(jTextField1.getText() + "/" + name);
                         te.setSize(500, 500);
                         te.setVisible(true);
+                    }
+                    else if("mp3".equals(name.split("\\.")[1])){
+                        MusicPlayer mp=new MusicPlayer(jTextField1.getText() + "/" + name);
+                        //mp.setSize(500, 500);
+                        mp.setVisible(true);
                     }
 
                 }

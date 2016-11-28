@@ -10,7 +10,7 @@ package GUI;
  * @author Sniper
  */
 public class TextEditor extends javax.swing.JFrame {
-
+ 
     /**
      * Creates new form TextEditor
      */
