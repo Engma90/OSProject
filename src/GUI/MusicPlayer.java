@@ -151,7 +151,7 @@ public class MusicPlayer extends javax.swing.JFrame {
                 new MusicPlayer().setVisible(true);
             }
         });
-    }
+    } 
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

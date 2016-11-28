@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
-
+ 
 import VHardware.HDD;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Sniper
  */
 public class FileManager extends javax.swing.JFrame {
-
+ 
     /**
      * Creates new form FileManager
      */
