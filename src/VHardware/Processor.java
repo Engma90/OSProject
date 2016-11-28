@@ -5,10 +5,17 @@
  */
 package VHardware;
 
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+
+
 /**
  *
  * @author MR.ROBOT
  */
 public class Processor {
+    
+    private Queue Ready=new PriorityQueue();
     
 }
