@@ -20,5 +20,9 @@ public class HDD {
         System.out.println(HD.isDirectory());////
     }
     
+    public void ayhaga(){
+        System.out.println("aaaaaaaaaa");
+    }
+    
     
 }
