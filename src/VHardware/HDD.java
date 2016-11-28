@@ -19,6 +19,9 @@ public class HDD {
         System.out.println(location);
         System.out.println(HD.isDirectory());////
     }
+    public void print(){
+        System.out.println("hello iam saddam");
+    }
     
     public void ayhaga(){
         System.out.println("aaaaaaaaaa");
