@@ -141,9 +141,9 @@ public class FileManager extends javax.swing.JFrame {
                         te.setSize(500, 500);
                         te.setVisible(true);
                     }
-                    else if("mp3".equals(name.split("\\.")[1])){
+                    else if("wav".equals(name.split("\\.")[1])){
                         MusicPlayer mp=new MusicPlayer(jTextField1.getText() + "/" + name);
-                        mp.setSize(500, 500);
+                        
                         mp.setVisible(true);
                     }
 
