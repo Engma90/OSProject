@@ -55,7 +55,6 @@ public class TextEditor extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -104,7 +103,7 @@ public class TextEditor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
  
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-     System.exit(0);
+     this.setVisible(false);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
    
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -117,7 +116,7 @@ public class TextEditor extends javax.swing.JFrame {
              FileWriter f2 = new FileWriter(nfile, false);
              f2.write(source);
              f2.close();
-             System.exit(0);
+             
 } catch (IOException e) {
     e.printStackTrace();
 }
