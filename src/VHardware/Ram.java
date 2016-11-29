@@ -5,28 +5,43 @@
  */
 package VHardware;
 
+import GUI.TextEditor;
+import java.util.LinkedList;
+import java.util.Queue;
+import javax.swing.JFrame;
+
 /**
  *
  * @author MR.ROBOT
  */
 public class Ram {
     
-    private final String[] ramChip=new String[10];
+   public JFrame[] ramChip=new JFrame[3];
+    public Queue<Integer> ready=new LinkedList<Integer>();
+    //private JFrame []process = {TextEditor};
+    
+    
     
     public Ram(){
         
     }
     
-    public void uploadToRam(int location,String content){
+    public void uploadToRam(int id){
+        ready.add(id);
+        System.out.println("id  is"+ready.peek());
+           
+       }
+       
         
-        ramChip[location]=content;
+    
+   
+    public int downloadFromRam(){
+            return ready.poll();
+        }
+
         
     }
-    
-    public String downloadFromRam(int location){
-        
-        return ramChip[location];
-        
-    }
-    
-}
+
+ 
+
+

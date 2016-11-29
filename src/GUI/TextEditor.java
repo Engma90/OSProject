@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import VHardware.Processor;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -31,12 +32,15 @@ public class TextEditor extends javax.swing.JFrame {
      * Creates new form TextEditor
      */
     String Path;
+     public int id = 1;
     public TextEditor() {
         initComponents();
+        
     }
     public TextEditor(String Path){
         initComponents();
         this.Path=Path;
+        this.id = id;
     }
 
     /**
@@ -57,6 +61,7 @@ public class TextEditor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
+        setName("TextEditor"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -125,9 +130,11 @@ public class TextEditor extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-    
+    Processor pr = new Processor();
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        
+        pr.fork(id);
        BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(Path));
