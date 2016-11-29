@@ -14,6 +14,7 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -26,18 +27,14 @@ public class DT extends javax.swing.JFrame {
      * Creates new form DT
      */
     public DT() {
+
         initComponents();
-        setLayout(null); // :-)
-        PicPanel mainPanel = new PicPanel("/resources/kali_linux_wallpaper__i_am_free___2_by_salvoru87-d87y9p9.jpg");
-        mainPanel.setBounds(0, 0, 1200, 650);
-        
-        add(mainPanel);
 
         jLabel1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    FileManager fm =new FileManager();
+                    FileManager fm = new FileManager();
                     fm.setVisible(true);
                 }
             }
@@ -46,7 +43,7 @@ public class DT extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    FileManager fm =new FileManager();
+                    FileManager fm = new FileManager();
                     fm.setVisible(true);
                 }
             }
@@ -66,6 +63,11 @@ public class DT extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/files.png"))); // NOI18N
         jLabel1.setToolTipText("File Manager");
@@ -101,6 +103,18 @@ public class DT extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+        
+        
+        
+        setLayout(null);
+        PicPanel mainPanel;
+        mainPanel = new PicPanel("/resources/kali_linux_wallpaper__i_am_free___2_by_salvoru87-d87y9p9.jpg");
+        mainPanel.setBounds(0, 0, getSize().width, getSize().height);
+        add(mainPanel);
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -132,17 +146,17 @@ public class DT extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 DT dt = new DT();
-                dt.setSize(new Dimension(1200, 650));
+
+                dt.setExtendedState(JFrame.MAXIMIZED_BOTH); 
                 dt.setResizable(false);
-                
                 dt.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowActivated(WindowEvent e) {
-                    //dt.setAlwaysOnTop(true);
-                    //dt.toBack();
-                }
-            });
-                
+                    @Override
+                    public void windowActivated(WindowEvent e) {
+                        //dt.setAlwaysOnTop(true);
+                        //dt.toBack();
+                    }
+                });
+
                 dt.setVisible(true);
             }
         });
