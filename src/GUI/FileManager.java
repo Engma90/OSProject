@@ -6,6 +6,8 @@
 package GUI;
  
 import VHardware.HDD;
+import VHardware.Processor;
+import VHardware.Ram;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -120,7 +122,8 @@ public class FileManager extends javax.swing.JFrame {
         listfiles(newAddress);
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    Processor processor=new Processor();
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
         HDD HD = new HDD();
@@ -141,7 +144,8 @@ public class FileManager extends javax.swing.JFrame {
                     else if("txt".equals(name.split("\\.")[1])){
                         TextEditor te=new TextEditor(jTextField1.getText() + "/" + name);
                         te.setSize(500, 500);
-                        te.setVisible(true);
+                        processor.open(te);
+                        //te.setVisible(true);
                     }
                     else if("wav".equals(name.split("\\.")[1])){
                         MusicPlayer mp=new MusicPlayer(jTextField1.getText() + "/" + name);

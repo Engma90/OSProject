@@ -5,25 +5,28 @@
  */
 package VHardware;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author MR.ROBOT
  */
 public class Ram {
     
-    private final String[] ramChip=new String[10];
+    public final JFrame[] ramChip=new JFrame[10];
+    //public 
     
     public Ram(){
         
     }
     
-    public void uploadToRam(int location,String content){
+    public void uploadToRam(int location,JFrame content){
         
         ramChip[location]=content;
         
     }
     
-    public String downloadFromRam(int location){
+    public JFrame downloadFromRam(int location){
         
         return ramChip[location];
         
