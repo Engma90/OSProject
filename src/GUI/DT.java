@@ -119,7 +119,7 @@ public class DT extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setLayout(null);
         PicPanel mainPanel;
-        mainPanel = new PicPanel("/resources/kali_linux_wallpaper__i_am_free___2_by_salvoru87-d87y9p9.jpg");
+        mainPanel = new PicPanel("/resources/bg1.jpg");
         mainPanel.setBounds(0, 0, getSize().width, getSize().height);
         add(mainPanel);
         jButton1.setLocation(getSize().width-jButton1.getWidth(), getSize().height-jButton1.getHeight());//
@@ -205,7 +205,7 @@ public class DT extends javax.swing.JFrame {
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
-            g.drawImage(image, 0, 0, this);
+            g.drawImage(image, 0, 0,getSize().width,getSize().height, this);
         }
 
 //@Override

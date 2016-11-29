@@ -48,7 +48,7 @@ public class Processor {
     
 
     public Processor() {
-        dispatch();
+        //dispatch();
     }
 
     private final int timeSlice = 100;
