@@ -16,8 +16,8 @@ import javax.swing.JFrame;
  */
 public class Ram {
     
-   public JFrame[] ramChip=new JFrame[3];
-    public Queue<Integer> ready=new LinkedList<Integer>();
+   public static  JFrame[] ramChip=new JFrame[10];
+    public static  Queue<Integer> ready=new LinkedList<Integer>();
     //private JFrame []process = {TextEditor};
     
     
@@ -25,10 +25,26 @@ public class Ram {
     public Ram(){
         
     }
-    
-    public void uploadToRam(int id){
-        ready.add(id);
-        System.out.println("id  is"+ready.peek());
+   
+    public static  void uploadToRam(JFrame f){
+       for(int i=0; i<ramChip.length;i++){
+           if(ramChip[i]==null){
+               ramChip[i]=f;
+               ready.add(i);
+               System.out.println("id  is "+ready.peek());
+                break;
+              
+               
+               
+           }
+           else{
+               System.out.println("ram is full");
+           }
+           
+       }
+        
+        
+        
            
        }
        

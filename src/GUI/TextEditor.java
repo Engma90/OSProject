@@ -32,9 +32,10 @@ public class TextEditor extends javax.swing.JFrame {
      * Creates new form TextEditor
      */
     String Path;
-     public int id = 1;
+     private static int id = 1;
     public TextEditor() {
         initComponents();
+        this.id = id;
 
         
 
@@ -139,7 +140,8 @@ public class TextEditor extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         
-        pr.fork(id);
+        
+       // pr.dispatch();
        BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(Path));
@@ -200,7 +202,11 @@ try {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TextEditor().setVisible(true);
+               
+                //new TextEditor().setVisible(true);
+               //  pr.fork(id,);
+               TextEditor te =new TextEditor();
+               Processor.fork( te);
             }
         });
     }

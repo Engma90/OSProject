@@ -17,27 +17,23 @@ import javax.swing.JFrame;
  *
  * @author MR.ROBOT
  */
-public class Processor {
+public  class Processor {
 
 
-    private Queue Ready = new PriorityQueue();
-    Ram ram = new Ram();
+   //Ram ram = new Ram();
 
-   /* private void dispatch() {
-        ram.downloadFromRam();
-        
-        
-    }*/
-    public void  fork(int id){
-       ram.uploadToRam(id);
+    public static void  fork(JFrame f){
+       Ram.uploadToRam(f);
+       
         
         
     }
-    public void dispatch(){
-       int selector = ram.downloadFromRam();
-            ram.ramChip[selector].setVisible(true);
-                
-            }
+//    public void  dispatch(){
+//       int selector = ram.downloadFromRam();
+//            ram.ramChip[selector].setVisible(true);
+//            System.out.println("ramchip");
+//                
+//            }
         
     
 
@@ -48,43 +44,13 @@ public class Processor {
     
 
     public Processor() {
-        dispatch();
+        
     }
 
     private final int timeSlice = 100;
     //private Queue Ready=new PriorityQueue();
   
 
-    public void open(JFrame f) {
-        for (int i = 0; i < ram.ramChip.length; i++) {
-            if (ram.ramChip[i] == null) {
-                ram.ramChip[i] = f;
-            }
-        }
-    }
-
-   /* private void dispatch() {
-        Thread dispatcher = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                
-                    for (int i = 0; i < ram.ramChip.length; i++) {
-                        
-                        if (ram.ramChip[i] != null) {
-                            try {
-                                Thread.sleep(3000);
-                            } catch (InterruptedException ex) {
-                                Logger.getLogger(Processor.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            ram.ramChip[i].setVisible(true);
-                        }
-                    }
-                
-
-            }
-        });
-        dispatcher.start();
-    }*/
 
     private class context {
 

@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import VHardware.Processor;
 import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.AudioFormat;
@@ -33,12 +34,13 @@ public class MusicPlayer extends javax.swing.JFrame {
     private Thread thread;
     private int curruntPossision = 0;
     private int total = 0;
+    private int id = 2;
 
     public MusicPlayer() {
 
         initComponents();
         setAlwaysOnTop(rootPaneCheckingEnabled);
-        Path = new File("").getAbsolutePath() + "/HDD/1.wav";
+        Path = new File("").getAbsolutePath() + "/HDD/Disk1/1.wav";
     }
 
     public MusicPlayer(String Path) {
@@ -288,7 +290,9 @@ public class MusicPlayer extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new MusicPlayer().setVisible(true);
+            MusicPlayer mp=new MusicPlayer();
+            Processor.fork(mp);
+            mp.setVisible(true);
         });
     }
 
