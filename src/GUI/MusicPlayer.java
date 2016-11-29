@@ -37,11 +37,13 @@ public class MusicPlayer extends javax.swing.JFrame {
     public MusicPlayer() {
 
         initComponents();
+        setAlwaysOnTop(rootPaneCheckingEnabled);
         Path = new File("").getAbsolutePath() + "/HDD/1.wav";
     }
 
     public MusicPlayer(String Path) {
         initComponents();
+        setAlwaysOnTop(rootPaneCheckingEnabled);
         this.Path = Path;
     }
 

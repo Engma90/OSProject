@@ -6,6 +6,8 @@
 package GUI;
  
 import VHardware.HDD;
+import VHardware.Processor;
+import VHardware.Ram;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -26,7 +28,7 @@ public class FileManager extends javax.swing.JFrame {
         
         initComponents();
         model = (DefaultTableModel) jTable1.getModel();
-        
+        setAlwaysOnTop(rootPaneCheckingEnabled);
     }
 
     /**
@@ -120,7 +122,8 @@ public class FileManager extends javax.swing.JFrame {
         listfiles(newAddress);
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    Processor processor=new Processor();
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
         HDD HD = new HDD();
@@ -205,7 +208,7 @@ public class FileManager extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FileManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

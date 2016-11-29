@@ -14,6 +14,7 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -26,18 +27,14 @@ public class DT extends javax.swing.JFrame {
      * Creates new form DT
      */
     public DT() {
+        setUndecorated(true);
         initComponents();
-        setLayout(null); // :-)
-        PicPanel mainPanel = new PicPanel("/resources/kali_linux_wallpaper__i_am_free___2_by_salvoru87-d87y9p9.jpg");
-        mainPanel.setBounds(0, 0, 1200, 650);
-        
-        add(mainPanel);
-
+        setAlwaysOnTop(rootPaneCheckingEnabled);
         jLabel1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    FileManager fm =new FileManager();
+                    FileManager fm = new FileManager();
                     fm.setVisible(true);
                 }
             }
@@ -46,7 +43,7 @@ public class DT extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    FileManager fm =new FileManager();
+                    FileManager fm = new FileManager();
                     fm.setVisible(true);
                 }
             }
@@ -64,8 +61,14 @@ public class DT extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/files.png"))); // NOI18N
         jLabel1.setToolTipText("File Manager");
@@ -73,6 +76,13 @@ public class DT extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("File Manager");
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/power.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,6 +97,9 @@ public class DT extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(566, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,11 +108,26 @@ public class DT extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        setLayout(null);
+        PicPanel mainPanel;
+        mainPanel = new PicPanel("/resources/kali_linux_wallpaper__i_am_free___2_by_salvoru87-d87y9p9.jpg");
+        mainPanel.setBounds(0, 0, getSize().width, getSize().height);
+        add(mainPanel);
+        jButton1.setLocation(getSize().width-jButton1.getWidth(), getSize().height-jButton1.getHeight());//
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,17 +160,17 @@ public class DT extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 DT dt = new DT();
-                dt.setSize(new Dimension(1200, 650));
+                //dt.setUndecorated(true);
+                dt.setExtendedState(JFrame.MAXIMIZED_BOTH); 
                 dt.setResizable(false);
-                
                 dt.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowActivated(WindowEvent e) {
-                    //dt.setAlwaysOnTop(true);
-                    //dt.toBack();
-                }
-            });
-                
+                    @Override
+                    public void windowActivated(WindowEvent e) {
+                        //dt.setAlwaysOnTop(true);
+                        //dt.toBack();
+                    }
+                });
+
                 dt.setVisible(true);
             }
         });
@@ -188,6 +216,7 @@ public class DT extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

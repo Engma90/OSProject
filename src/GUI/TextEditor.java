@@ -35,10 +35,15 @@ public class TextEditor extends javax.swing.JFrame {
      public int id = 1;
     public TextEditor() {
         initComponents();
+
         
+
+        setAlwaysOnTop(rootPaneCheckingEnabled);
+
     }
     public TextEditor(String Path){
         initComponents();
+        setAlwaysOnTop(rootPaneCheckingEnabled);
         this.Path=Path;
         this.id = id;
     }
