@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
- 
+
 import VHardware.HDD;
 import VHardware.Processor;
 import VHardware.Ram;
@@ -12,26 +12,55 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author Sniper
  */
 public class FileManager extends javax.swing.JFrame {
- 
+
     /**
      * Creates new form FileManager
-     * 
+     *
      */
     private int id = 3;
+
     public FileManager() {
-       
-        
+
         this.id = id;
         initComponents();
         model = (DefaultTableModel) jTable1.getModel();
+        
+        //ImageIcon.class;
+        //jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+        jTable1.getColumnModel().getColumn(1).setMinWidth(70);
+        jTable1.getColumnModel().getColumn(1).setMaxWidth(70);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(70);
+        jTable1.getColumnModel().getColumn(1).setResizable(false);
+        
+        jTable1.getColumnModel().getColumn(2).setMinWidth(100);
+        jTable1.getColumnModel().getColumn(2).setMaxWidth(100);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jTable1.getColumnModel().getColumn(2).setResizable(false);
+
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(jTable1.getModel());
+        jTable1.setRowSorter(sorter);
+
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+        sortKeys.add(new RowSorter.SortKey(1, SortOrder.DESCENDING));
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
+        
         setAlwaysOnTop(rootPaneCheckingEnabled);
     }
 
@@ -65,22 +94,27 @@ public class FileManager extends javax.swing.JFrame {
 
         jTextField1.setEnabled(false);
 
+        jTable1.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Name", "Type"
+                "Name", "Type", "Size (Bytes)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setFillsViewportHeight(true);
+        jTable1.setGridColor(new java.awt.Color(57, 105, 138));
+        jTable1.setRowHeight(30);
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -105,13 +139,12 @@ public class FileManager extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (jTextField1.getText().endsWith("HDD")) {
             return;
@@ -126,11 +159,10 @@ public class FileManager extends javax.swing.JFrame {
         listfiles(newAddress);
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
     
-    Processor processor=new Processor();
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
-        
+
         HDD HD = new HDD();
         listfiles(HD.location);
 
@@ -139,23 +171,26 @@ public class FileManager extends javax.swing.JFrame {
                 JTable table = (JTable) me.getSource();
                 Point p = me.getPoint();
                 int row = table.rowAtPoint(p);
+                row=jTable1.convertRowIndexToModel(row);
                 if (me.getClickCount() == 2) {
-                    String name=(String) jTable1.getModel().getValueAt(row, 0).toString();
+                    String name = (String) jTable1.getModel().getValueAt(row, 0).toString();
                     if (((String) jTable1.getModel().getValueAt(row, 1).toString()).equals("Folder")) {
 
                         listfiles(jTextField1.getText() + "/" + name);
-                    }
-                    
-                    else if("txt".equals(name.split("\\.")[1])){
-                        TextEditor te=new TextEditor(jTextField1.getText() + "/" + name);
+                    } else if (name.contains(".") && "txt".equals(name.split("\\.")[1])) {
+                        TextEditor te = new TextEditor(jTextField1.getText() + "/" + name);
                         te.setSize(500, 500);
+                        te.setTitle("Text Editor - "+name);
                         te.setVisible(true);
                         Processor.fork(te);
-                    }
-                    else if("wav".equals(name.split("\\.")[1])){
-                        MusicPlayer mp=new MusicPlayer(jTextField1.getText() + "/" + name);
+                    } else if (name.contains(".") && "wav".equals(name.split("\\.")[1])) {
+                        MusicPlayer mp = new MusicPlayer(jTextField1.getText() + "/" + name);
+                        mp.setTitle("Music Player - "+name);
                         Processor.fork(mp);
                         mp.setVisible(true);
+                    }
+                    else {
+                         JOptionPane.showMessageDialog(null, "Unsupported file","Error", JOptionPane.INFORMATION_MESSAGE);
                     }
 
                 }
@@ -180,12 +215,33 @@ public class FileManager extends javax.swing.JFrame {
         jTextField1.setText(path);
         File file = new File(path);
         File[] Files = file.listFiles();
-
+//        ImageIcon icon=new ImageIcon(getClass().getResource("/resources/files.png"));
+//        
+//        class MyTableModel extends DefaultTableModel{
+//            public MyTableModel(Object[] columnNames){
+//            super(columnNames, 0);
+//            }
+//         @Override
+//        public Class getColumnClass(int col) {
+//        switch (col){
+//            case 3: return ImageIcon.class;
+//            default:return String.class;
+//                
+//        }
+//        }
+//        }
+//        Object[] cn=new Object[model.getColumnCount()];
+//         for(int i=0;i<cn.length;i++){
+//             cn[i]=model.getColumnName(i);
+//        }
+//        MyTableModel mtm=(MyTableModel) jTable1.getModel();
+//        
+        
         for (File f : Files) {
-          
-
-            model.addRow(new Object[]{f.getName(), (f.isFile() ? " File" : "Folder")});
+            
+            model.addRow(new Object[]{f.getName(), (f.isFile() ? "File" : "Folder"),(f.isFile() ? f.length() : "-")});
         }
+        
     }
 
     /**
@@ -214,13 +270,13 @@ public class FileManager extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FileManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 new FileManager().setVisible(true);
-               ;
+                ;
             }
         });
     }
