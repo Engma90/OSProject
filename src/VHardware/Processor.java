@@ -29,6 +29,7 @@ public  class Processor {
     
     public static void main(String[] args) {
         biosBoot();
+        dispatch();
     }
     public static void biosBoot(){
         DT dt=new DT();
@@ -53,12 +54,27 @@ public  class Processor {
         
         
     }
-//    public void  dispatch(){
-//       int selector = ram.downloadFromRam();
-//            ram.ramChip[selector].setVisible(true);
-//            System.out.println("ramchip");
-//                
-//            }
+    
+    public static void  dispatch(){
+       
+        Thread shortTerm =new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true){
+                    if(!Ram.ready.isEmpty()){
+                        Ram.ramChip[Ram.ready.poll()].setVisible(true);
+                        
+                        Thread.sleep(timeSlice);
+                    }
+                }
+
+
+            }
+        });
+        shortTerm.start();
+        
+                
+            }
         
     
 
