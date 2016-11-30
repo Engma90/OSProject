@@ -184,13 +184,13 @@ public class FileManager extends javax.swing.JFrame {
                         TextEditor te = new TextEditor(jTextField1.getText() + "/" + name);
                         te.setSize(500, 500);
                         te.setTitle("Text Editor - "+name);
-                        te.setVisible(true);
+                        //te.setVisible(true);
                         Processor.fork(te);
                     } else if (name.contains(".") && "wav".equals(name.split("\\.")[1])) {
                         MusicPlayer mp = new MusicPlayer(jTextField1.getText() + "/" + name);
                         mp.setTitle("Music Player - "+name);
                         Processor.fork(mp);
-                        mp.setVisible(true);
+                        //mp.setVisible(true);
                     }
                     else {
                          JOptionPane.showMessageDialog(null, "Unsupported file","Error", JOptionPane.INFORMATION_MESSAGE);
@@ -285,8 +285,8 @@ public class FileManager extends javax.swing.JFrame {
                 
               //  new FileManager().setVisible(true);
               FileManager fm = new FileManager();
-              Processor.fork(fm);
-              fm.setVisible(true);
+              
+              //fm.setVisible(true);
                 
                 ;
             }

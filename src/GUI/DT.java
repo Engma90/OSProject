@@ -36,9 +36,10 @@ public class DT extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     FileManager fm = new FileManager();
-                    Processor.fork(fm);
+                    
                     fm.setTitle("File Manager");
-                    fm.setVisible(true);
+                    Processor.fork(fm);
+                    //fm.setVisible(true);
                 }
             }
         });
@@ -47,9 +48,10 @@ public class DT extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     FileManager fm = new FileManager();
-                     Processor.fork(fm);
+                     
                     fm.setTitle("File Manager");
-                    fm.setVisible(true);
+                    Processor.fork(fm);
+                    //fm.setVisible(true);
                 }
             }
         });
@@ -167,8 +169,8 @@ public class DT extends javax.swing.JFrame {
                 DT dt = new DT();
                 //dt.setUndecorated(true);
                
-
-                dt.setVisible(true);
+                //Processor.fork(dt); 
+                //dt.setVisible(true);
             }
         });
     }
