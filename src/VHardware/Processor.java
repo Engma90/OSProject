@@ -18,6 +18,9 @@ import javax.swing.JFrame;
  * @author MR.ROBOT
  */
 public  class Processor {
+     public Processor() {
+        
+    }
 
 
    //Ram ram = new Ram();
@@ -43,12 +46,13 @@ public  class Processor {
    
     
 
-    public Processor() {
-        
-    }
+   
 
     private final int timeSlice = 100;
-    //private Queue Ready=new PriorityQueue();
+    public static void terminate(JFrame f){
+        
+    }
+   
   
 
 
