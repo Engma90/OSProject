@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author MR.ROBOT
+ * @author MR.ROBOT and saddam
  */
 public  class Processor {
      public Processor() {
