@@ -167,7 +167,7 @@ public class FileManager extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
         HDD HD = new HDD();
-        listfiles(HD.location);
+        listfiles(HD.HDD_LOCATION);
 
         jTable1.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me) {

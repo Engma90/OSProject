@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import VHardware.HDD;
 import VHardware.Processor;
 import java.io.File;
 import java.io.IOException;
@@ -25,9 +26,9 @@ public class MusicPlayer extends javax.swing.JFrame {
     /**
      * Creates new form MusicPlayer
      */
-    private String Path;
+    private File sound;
     private final int BUFFER_SIZE = 64;
-    private File soundFile;
+    //private File soundFile;
     private AudioInputStream audioStream;
     private AudioFormat audioFormat;
     private SourceDataLine sourceLine;
@@ -40,30 +41,30 @@ public class MusicPlayer extends javax.swing.JFrame {
 
         initComponents();
         setAlwaysOnTop(rootPaneCheckingEnabled);
-        Path = new File("").getAbsolutePath() + "/HDD/Disk1/1.wav";
+        sound = HDD.read(HDD.HDD_LOCATION+"/Disk1/1.wav");
     }
 
     public MusicPlayer(String Path) {
         initComponents();
         setAlwaysOnTop(rootPaneCheckingEnabled);
-        this.Path = Path;
+        this.sound = HDD.read(Path);
     }
 
     
 
     /**
-     * @param filename the name of the file that is going to be played
+     * @param soundFile
      */
-    public void playSound(String filename) {
+    public void playSound(File soundFile) {
         stop = false;
         thread = new Thread(() -> {
-            String strFilename = filename;
-
-            try {
-                soundFile = new File(strFilename);
-            } catch (Exception e) {
-                System.exit(1);
-            }
+//            String strFilename = filename;
+//
+//            try {
+//                soundFile = new File(strFilename);
+//            } catch (Exception e) {
+//                System.exit(1);
+//            }
 
             try {
                 audioStream = AudioSystem.getAudioInputStream(soundFile);
@@ -235,12 +236,12 @@ public class MusicPlayer extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
-        playSound(Path);
+        playSound(sound);
 
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        playSound(Path);
+        playSound(sound);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
