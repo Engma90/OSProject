@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import VHardware.HDD;
 import VHardware.Processor;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -131,7 +132,7 @@ public class TextEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
    
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        
+      /*  
         File file = new File(Path);
        file.delete();
        File nfile = new File(Path);
@@ -144,8 +145,9 @@ public class TextEditor extends javax.swing.JFrame {
 } catch (IOException e) {
     e.printStackTrace();
 }
-       
-        
+       */
+      String content = jTextArea1.getText();
+       HDD.write(Path, content);
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     Processor pr = new Processor();
@@ -156,8 +158,9 @@ public class TextEditor extends javax.swing.JFrame {
        // pr.dispatch();
        BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader(Path));
+            br = new BufferedReader(new FileReader(HDD.read(Path)));
         } catch (FileNotFoundException ex) {
+            
             Logger.getLogger(TextEditor.class.getName()).log(Level.SEVERE, null, ex);
         }
 try {
