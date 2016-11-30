@@ -44,7 +44,7 @@ public class Ram {
                
            }
           
-          System.out.println("content in Ramchip is " +ramChip[i].getName());
+          //System.out.println("content in Ramchip is " +ramChip[i].getName());
          
            
        }
