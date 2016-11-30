@@ -31,17 +31,24 @@ public class Ram {
            if(ramChip[i]==null){
                ramChip[i]=f;
                ready.add(i);
-               System.out.println("id  is "+ready.peek());
-                break;
+             //  System.out.println("id  is "+ready.peek());
+               break;
+               
+               //
               
                
                
            }
-           else{
-               System.out.println("ram is full");
+           else if(i==(ramChip.length-1)){
+                System.out.println("Ram is Full");
+               
            }
+          
+          System.out.println("content in Ramchip is " +ramChip[i].getName());
+         
            
        }
+       
         
         
         
@@ -54,6 +61,18 @@ public class Ram {
     public int downloadFromRam(){
             return ready.poll();
         }
+    
+    public static void releaseFromRam(JFrame f){
+        for(int i = 0;i<ramChip.length;i++){
+            if(ramChip[i]==f){
+                ramChip[i]=null;
+                
+                break;
+            }
+                
+        }
+        
+    }
 
         
     }

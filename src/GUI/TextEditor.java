@@ -72,6 +72,9 @@ public class TextEditor extends javax.swing.JFrame {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
         });
 
         jTextArea1.setColumns(20);
@@ -171,6 +174,11 @@ try {
        
        
     }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        Processor.terminate(this);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

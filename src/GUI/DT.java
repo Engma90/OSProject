@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import VHardware.Processor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
@@ -35,6 +36,8 @@ public class DT extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     FileManager fm = new FileManager();
+                    Processor.fork(fm);
+                    fm.setTitle("File Manager");
                     fm.setVisible(true);
                 }
             }
@@ -44,6 +47,8 @@ public class DT extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     FileManager fm = new FileManager();
+                     Processor.fork(fm);
+                    fm.setTitle("File Manager");
                     fm.setVisible(true);
                 }
             }
@@ -161,15 +166,7 @@ public class DT extends javax.swing.JFrame {
             public void run() {
                 DT dt = new DT();
                 //dt.setUndecorated(true);
-                dt.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-                dt.setResizable(false);
-                dt.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowActivated(WindowEvent e) {
-                        //dt.setAlwaysOnTop(true);
-                        //dt.toBack();
-                    }
-                });
+               
 
                 dt.setVisible(true);
             }

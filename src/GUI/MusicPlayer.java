@@ -174,6 +174,9 @@ public class MusicPlayer extends javax.swing.JFrame {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
         });
 
         jButton1.setText("Play");
@@ -253,6 +256,11 @@ public class MusicPlayer extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         release();
     }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        Processor.terminate(this);
+    }//GEN-LAST:event_formWindowClosed
 
 //    public void play() {
 //        try {
