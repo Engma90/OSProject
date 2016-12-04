@@ -19,6 +19,14 @@ public class SystemMonitor extends javax.swing.JFrame {
     /**
      * Creates new form SystemMonitor
      */
+     public void clearRows() {
+         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        int rowCount = model.getRowCount();
+//Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+    }
     public SystemMonitor() {
         initComponents();
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
@@ -52,7 +60,8 @@ public class SystemMonitor extends javax.swing.JFrame {
                         
                         //  try {
                         
-                         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                        // DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                        clearRows();
                          
                         for (int i = 0; i < Ram.ramChip.length; i++) {
                             if(Ram.ramChip[i]!=null){
@@ -151,6 +160,7 @@ public class SystemMonitor extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
       
         /* Create and display the form */
