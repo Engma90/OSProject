@@ -29,6 +29,7 @@ public class SystemMonitor extends javax.swing.JFrame {
     }
     public SystemMonitor() {
         initComponents();
+        setAlwaysOnTop(rootPaneCheckingEnabled);
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
 
         Thread t = new Thread(new Runnable() {
