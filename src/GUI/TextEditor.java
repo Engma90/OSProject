@@ -5,23 +5,14 @@
  */
 package GUI;
 
-import VHardware.HDD;
 import VHardware.Processor;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.ObservableList;
 
 /**
  *
@@ -33,12 +24,8 @@ public class TextEditor extends javax.swing.JFrame {
      * Creates new form TextEditor
      */
     String Path;
-     private static int id = 1;
     public TextEditor() {
         initComponents();
-        this.id = id;
-
-        
 
         setAlwaysOnTop(rootPaneCheckingEnabled);
 
@@ -47,7 +34,6 @@ public class TextEditor extends javax.swing.JFrame {
         initComponents();
         setAlwaysOnTop(rootPaneCheckingEnabled);
         this.Path=Path;
-        this.id = id;
     }
 
     /**
@@ -147,7 +133,7 @@ public class TextEditor extends javax.swing.JFrame {
 }
        */
       String content = jTextArea1.getText();
-       HDD.write(Path, content);
+       Processor.writeSegnal(Path, content);
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     Processor pr = new Processor();
@@ -158,7 +144,7 @@ public class TextEditor extends javax.swing.JFrame {
        // pr.dispatch();
        BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader(HDD.read(Path)));
+            br = new BufferedReader(new FileReader(Processor.readSegnal(Path)));
         } catch (FileNotFoundException ex) {
             
             Logger.getLogger(TextEditor.class.getName()).log(Level.SEVERE, null, ex);

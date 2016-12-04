@@ -8,6 +8,7 @@ package VHardware;
 import GUI.DT;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -21,6 +22,8 @@ import javax.swing.JFrame;
  * @author MR.ROBOT and saddam
  */
 public  class Processor {
+    private static final int timeSlice = 1000;
+    
      public Processor() {
         
     }
@@ -36,6 +39,7 @@ public  class Processor {
         
          dt.setExtendedState(JFrame.MAXIMIZED_BOTH); 
                 dt.setResizable(false);
+                dt.setTitle("Desktop");
                 dt.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowActivated(WindowEvent e) {
@@ -91,25 +95,20 @@ public  class Processor {
         
                 
             }
-        
-    
 
-    
-    
-
-   
-    
-
-   
-
-    private static final int timeSlice = 1000;
     
     public static void terminate(JFrame f){
         Ram.releaseFromRam(f);
         
         
     }
-   
+   public static File readSegnal(String loc) {
+        return HDD.read(loc);
+    }
+
+    public static void writeSegnal(String loc, String content) {
+        HDD.write(loc, content);
+    }
   
 
 
