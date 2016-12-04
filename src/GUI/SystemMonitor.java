@@ -41,7 +41,7 @@ public class SystemMonitor extends javax.swing.JFrame {
                         for (int i = 0; i < Ram.ramChip.length; i++) {
                             if(Ram.ramChip[i]!=null){
                                 Thread.sleep(1000);
-                           model.addRow(new Object[]{Ram.ramChip[i].getName(), "READY"});
+                           model.addRow(new Object[]{Ram.ramChip[i].getTitle(), "READY"});
                            Thread.sleep(2000);
                         System.out.println("1");}}
                     } catch (InterruptedException ex) {
@@ -66,7 +66,7 @@ public class SystemMonitor extends javax.swing.JFrame {
                         for (int i = 0; i < Ram.ramChip.length; i++) {
                             if(Ram.ramChip[i]!=null){
                                 Thread.sleep(2000);
-                            model.addRow(new Object[]{Ram.ramChip[i].getName(), "Running"});
+                            model.addRow(new Object[]{Ram.ramChip[i].getTitle(), "Running"});
                             Thread.sleep(1000);
                         System.out.println("2");}
                         }
