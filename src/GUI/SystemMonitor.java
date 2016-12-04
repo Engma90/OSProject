@@ -6,8 +6,11 @@
 package GUI;
 
 import VHardware.Ram;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,15 +18,38 @@ import javax.swing.table.DefaultTableModel;
  * @author MR.ROBOT
  */
 public class SystemMonitor extends javax.swing.JFrame {
+   public static class Node{
+       public JFrame f;
+       public String status;
+       public Node(JFrame f ,String s){
+           this.f = f;
+           this.status = s;
+       }
+       public Node(){
+           
+       }
+      
+   }
+   public static LinkedList<Node>items = new LinkedList<Node>();
 
     /**
      * Creates new form SystemMonitor
      */
+     public void clearRows() {
+         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        int rowCount = model.getRowCount();
+//Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+    }
     public SystemMonitor() {
         initComponents();
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        setAlwaysOnTop(rootPaneCheckingEnabled);
+            monitor();
+    }
 
-        Thread t = new Thread(new Runnable() {
+     /*   Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
@@ -32,19 +58,29 @@ public class SystemMonitor extends javax.swing.JFrame {
                         
                         for (int i = 0; i < Ram.ramChip.length; i++) {
                             if(Ram.ramChip[i]!=null){
-                                Thread.sleep(1000);
-                           model.addRow(new Object[]{Ram.ramChip[i].getName(), "READY"});
-                           Thread.sleep(2000);
-                        System.out.println("1");}}
+                               // Thread.sleep(1000);
+                           model.addRow(new Object[]{Ram.ramChip[i].getTitle(), "READY"});
+                         //  Thread.sleep(2000);
+                        System.out.println("1");}
+                            else{
+                                Thread.sleep(500);
+                            }
+                        
+                        
+                        
+                        
+                        
+                        
+                        }
                     } catch (InterruptedException ex) {
                         Logger.getLogger(SystemMonitor.class.getName()).log(Level.SEVERE, null, ex);
                     }
                        // 
                           
-            Thread t2= new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                              try {
+        //    Thread t2= new Thread(new Runnable() {
+                //        @Override
+                 //       public void run() {
+                           //   try {
                         // }
                         // } catch (InterruptedException ex) {
                         //  Logger.getLogger(SystemMonitor.class.getName()).log(Level.SEVERE, null, ex);
@@ -52,21 +88,25 @@ public class SystemMonitor extends javax.swing.JFrame {
                         
                         //  try {
                         
-                         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                        // DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                      //  clearRows();
                          
-                        for (int i = 0; i < Ram.ramChip.length; i++) {
-                            if(Ram.ramChip[i]!=null){
-                                Thread.sleep(2000);
-                            model.addRow(new Object[]{Ram.ramChip[i].getName(), "Running"});
-                            Thread.sleep(1000);
-                        System.out.println("2");}
-                        }
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(SystemMonitor.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                        }
-                    });
-            t2.start();
+                      //  for (int i = 0; i < Ram.ramChip.length; i++) {
+                         //   if(Ram.ramChip[i]!=null){
+                            //    Thread.sleep(2000);
+                         //   model.addRow(new Object[]{Ram.ramChip[i].getTitle(), "Running"});
+                        //    Thread.sleep(1000);
+                      //  System.out.println("2");}
+                          //  else{
+                           //     Thread.sleep(500);
+                         //   }
+                     //   }
+                  //  } catch (InterruptedException ex) {
+                  //      Logger.getLogger(SystemMonitor.class.getName()).log(Level.SEVERE, null, ex);
+                 //   }
+                //        }
+                //    });
+         //   t2.start();
                   
                         
                         //for (int i = 0; i < Ram.ramChip.length; i++) {
@@ -78,11 +118,54 @@ public class SystemMonitor extends javax.swing.JFrame {
                     //    Logger.getLogger(SystemMonitor.class.getName()).log(Level.SEVERE, null, ex);
                    // }
 
-                }
-            }
+              //  }
+           // }
 
-            private void Thread(Runnable runnable) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          //  private void Thread(Runnable runnable) {
+           //     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         //   }
+      //  });
+       // t.start();
+    }
+            }
+                });
+         t.start();
+    }
+        */
+    
+    public  void monitor(){
+          
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+             DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                while(true){
+                    
+                    for (int i = 0; i < items.size(); i++) {
+                        
+                        model.addRow(new Object[]{items.get(i).f.getTitle(),items.get(i).status});
+                        
+                    }
+                            
+                 try {
+                     Thread.sleep(1000);
+                 } catch (InterruptedException ex) {
+                     Logger.getLogger(SystemMonitor.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                 
+                 clearRows();
+               
+                
+                    
+                   
+                           
+                   
+                
+                      
+                    
+                    
+                
+            }
             }
         });
         t.start();
@@ -100,8 +183,6 @@ public class SystemMonitor extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -151,12 +232,14 @@ public class SystemMonitor extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
       
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SystemMonitor().setVisible(true);
+                SystemMonitor sm = new SystemMonitor();
+               
             }
         });
     }

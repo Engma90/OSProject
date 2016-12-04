@@ -179,7 +179,7 @@ try {
     }//GEN-LAST:event_formWindowClosed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        VHardware.Processor.Printer.print(this);
+        //VHardware.Processor.Printer.print(this);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
