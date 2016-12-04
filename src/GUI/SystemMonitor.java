@@ -5,6 +5,11 @@
  */
 package GUI;
 
+import VHardware.Ram;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author MR.ROBOT
@@ -16,6 +21,71 @@ public class SystemMonitor extends javax.swing.JFrame {
      */
     public SystemMonitor() {
         initComponents();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        // try {
+                        
+                        for (int i = 0; i < Ram.ramChip.length; i++) {
+                            if(Ram.ramChip[i]!=null){
+                                Thread.sleep(1000);
+                           model.addRow(new Object[]{Ram.ramChip[i].getName(), "READY"});
+                           Thread.sleep(2000);
+                        System.out.println("1");}}
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(SystemMonitor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                       // 
+                          
+            Thread t2= new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                              try {
+                        // }
+                        // } catch (InterruptedException ex) {
+                        //  Logger.getLogger(SystemMonitor.class.getName()).log(Level.SEVERE, null, ex);
+                        //  }
+                        
+                        //  try {
+                        
+                         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                         
+                        for (int i = 0; i < Ram.ramChip.length; i++) {
+                            if(Ram.ramChip[i]!=null){
+                                Thread.sleep(2000);
+                            model.addRow(new Object[]{Ram.ramChip[i].getName(), "Running"});
+                            Thread.sleep(1000);
+                        System.out.println("2");}
+                        }
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(SystemMonitor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                        }
+                    });
+            t2.start();
+                  
+                        
+                        //for (int i = 0; i < Ram.ramChip.length; i++) {
+                           // model.addRow(new Object[]{Ram.ramChip[i].getName(), "Ready"});
+                           
+
+                      //  }
+                   // } catch (InterruptedException ex) {
+                    //    Logger.getLogger(SystemMonitor.class.getName()).log(Level.SEVERE, null, ex);
+                   // }
+
+                }
+            }
+
+            private void Thread(Runnable runnable) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        t.start();
     }
 
     /**
@@ -82,29 +152,7 @@ public class SystemMonitor extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SystemMonitor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SystemMonitor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SystemMonitor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SystemMonitor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
+      
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
