@@ -23,6 +23,7 @@ import javax.swing.JFrame;
  */
 public  class Processor {
     private static final int timeSlice = 1000;
+    public static Printer Printer=new Printer();
     
      public Processor() {
         
@@ -48,6 +49,7 @@ public  class Processor {
                     }
                 });
                 Processor.fork(dt);
+                
         //dt.setVisible(true);
     }
     
