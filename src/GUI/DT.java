@@ -30,12 +30,14 @@ public class DT extends javax.swing.JFrame {
     public DT() {
         setUndecorated(true);
         initComponents();
-        setAlwaysOnTop(rootPaneCheckingEnabled);
+        
+        //setAlwaysOnTop(true);
+        
         setListeners();
     }
     
     
-    public void setListeners(){
+    public final void setListeners(){
         
         jLabel1.addMouseListener(new MouseAdapter() {
             @Override
@@ -180,6 +182,8 @@ public class DT extends javax.swing.JFrame {
         mainPanel.setBounds(0, 0, getSize().width, getSize().height);
         add(mainPanel);
         jButton1.setLocation(getSize().width-jButton1.getWidth(), getSize().height-jButton1.getHeight());//
+        System.out.println(getSize());
+        repaint();
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

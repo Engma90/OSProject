@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class HDD {
 
-    public static final String HDD_LOCATION = new File("").getAbsolutePath() + "/HDD";
+    public static final String HDD_LOCATION = new File("").getAbsolutePath() + "\\HDD";
 
     public HDD() {
 

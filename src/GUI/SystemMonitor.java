@@ -45,7 +45,7 @@ public class SystemMonitor extends javax.swing.JFrame {
     }
     public SystemMonitor() {
         initComponents();
-        setAlwaysOnTop(rootPaneCheckingEnabled);
+        setAlwaysOnTop(true);
             monitor();
     }
 

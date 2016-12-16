@@ -27,12 +27,12 @@ public class TextEditor extends javax.swing.JFrame {
     public TextEditor() {
         initComponents();
 
-        setAlwaysOnTop(rootPaneCheckingEnabled);
+        setAlwaysOnTop(true);
 
     }
     public TextEditor(String Path){
         initComponents();
-        setAlwaysOnTop(rootPaneCheckingEnabled);
+        setAlwaysOnTop(true);
         this.Path=Path;
     }
 
@@ -179,7 +179,7 @@ try {
     }//GEN-LAST:event_formWindowClosed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        //VHardware.Processor.Printer.print(this);
+        VHardware.Processor.printer.print(this);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**

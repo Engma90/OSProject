@@ -40,13 +40,13 @@ public class MusicPlayer extends javax.swing.JFrame {
     public MusicPlayer() {
 
         initComponents();
-        setAlwaysOnTop(rootPaneCheckingEnabled);
+        setAlwaysOnTop(true);
         sound = Processor.readSegnal(HDD.HDD_LOCATION+"/Disk1/1.wav");
     }
 
     public MusicPlayer(String Path) {
         initComponents();
-        setAlwaysOnTop(rootPaneCheckingEnabled);
+        setAlwaysOnTop(true);
         this.sound = Processor.readSegnal(Path);
     }
 

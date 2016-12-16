@@ -28,6 +28,7 @@ public class Processor {
 
     private static final int timeSlice = 1000;
     public static SystemMonitor sm = new SystemMonitor();
+    public static Printer printer=new Printer();
     
     public Processor() {
 
@@ -36,11 +37,12 @@ public class Processor {
     public static void main(String[] args) {
         biosBoot();
         dispatch();
+        
     }
 
     public static void biosBoot() {
         DT dt = new DT();
-
+        
         dt.setExtendedState(JFrame.MAXIMIZED_BOTH);
         dt.setResizable(false);
         dt.setTitle("Desktop");
@@ -51,6 +53,7 @@ public class Processor {
                 //dt.toBack();
             }
         });
+        
         Processor.fork(dt);
         //dt.setVisible(true);
     }

@@ -36,11 +36,10 @@ public class FileManager extends javax.swing.JFrame {
     private int id = 3;
 
     public FileManager() {
-
-        this.id = id;
         initComponents();
         model = (DefaultTableModel) jTable1.getModel();
-        
+        setAlwaysOnTop(true);
+
         //ImageIcon.class;
         //jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         jTable1.getColumnModel().getColumn(1).setMinWidth(70);
@@ -61,7 +60,7 @@ public class FileManager extends javax.swing.JFrame {
         sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
         sorter.setSortKeys(sortKeys);
         
-        setAlwaysOnTop(rootPaneCheckingEnabled);
+        
     }
 
     /**
@@ -153,10 +152,10 @@ public class FileManager extends javax.swing.JFrame {
             return;
         }
         String newAddress = "";
-        String[] Address = jTextField1.getText().split("/");
+        String[] Address = jTextField1.getText().split("\\\\");
         //Address[0]="/";
         for (int i = 1; i < Address.length - 1; i++) {
-            newAddress += "/" + Address[i];
+            newAddress += "\\" + Address[i];
         }
 
         listfiles(newAddress);
@@ -179,15 +178,15 @@ public class FileManager extends javax.swing.JFrame {
                     String name = (String) jTable1.getModel().getValueAt(row, 0).toString();
                     if (((String) jTable1.getModel().getValueAt(row, 1).toString()).equals("Folder")) {
 
-                        listfiles(jTextField1.getText() + "/" + name);
+                        listfiles(jTextField1.getText() + "\\" + name);
                     } else if (name.contains(".") && "txt".equals(name.split("\\.")[1])) {
-                        TextEditor te = new TextEditor(jTextField1.getText() + "/" + name);
+                        TextEditor te = new TextEditor(jTextField1.getText() + "\\" + name);
                         te.setSize(500, 500);
                         te.setTitle("Text Editor - "+name);
                         //te.setVisible(true);
                         Processor.fork(te);
                     } else if (name.contains(".") && "wav".equals(name.split("\\.")[1])) {
-                        MusicPlayer mp = new MusicPlayer(jTextField1.getText() + "/" + name);
+                        MusicPlayer mp = new MusicPlayer(jTextField1.getText() + "\\" + name);
                         mp.setTitle("Music Player - "+name);
                         Processor.fork(mp);
                         //mp.setVisible(true);
