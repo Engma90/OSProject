@@ -28,7 +28,7 @@ public class Processor {
 
     private static final int timeSlice = 1000;
     public static SystemMonitor sm = new SystemMonitor();
-    
+    public static Printer printer=new Printer();
     public Processor() {
 
     }
