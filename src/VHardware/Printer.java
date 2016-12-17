@@ -5,6 +5,8 @@
  */
 package VHardware;
 
+import GUI.SystemMonitor;
+import static GUI.SystemMonitor.items;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.logging.Level;
@@ -32,7 +34,22 @@ public final class Printer {
                     
                     try {
                         PrintQueue.peek().setTitle(PrintQueue.peek().getTitle() + " -- Printing");
-                        Thread.sleep(5000);
+                        for (int i = 0; i < items.size(); i++) {
+                            if (items.get(i).f.equals(PrintQueue.peek())) {
+                                items.get(i).status="Waiting";
+                                break;
+                            }
+                        }
+                        Thread.sleep(10000);
+                        for (int i = 0; i < items.size(); i++) {
+                            if (items.get(i).f.equals(PrintQueue.peek())) {
+                                
+                                items.get(i).status="Ready";
+                                Thread.sleep(2000);
+                                items.get(i).status="Running";
+                                break;
+                            }
+                        }
                         PrintQueue.peek().setTitle(PrintQueue.poll().getTitle().replace(" -- Printing", ""));
                         //JOptionPane.showMessageDialog(null, "Printing Finished","Task compleated", JOptionPane.INFORMATION_MESSAGE);
                     } catch (InterruptedException ex) {

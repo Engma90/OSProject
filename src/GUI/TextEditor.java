@@ -23,7 +23,7 @@ public class TextEditor extends javax.swing.JFrame {
     /**
      * Creates new form TextEditor
      */
-    String Path;
+    public String DistFile;
     public TextEditor() {
         initComponents();
 
@@ -33,7 +33,10 @@ public class TextEditor extends javax.swing.JFrame {
     public TextEditor(String Path){
         initComponents();
         setAlwaysOnTop(rootPaneCheckingEnabled);
-        this.Path=Path;
+        this.DistFile=Path;
+    }
+    public String getPath(){
+        return this.DistFile;
     }
 
     /**
@@ -133,7 +136,7 @@ public class TextEditor extends javax.swing.JFrame {
 }
        */
       String content = jTextArea1.getText();
-       Processor.writeSegnal(Path, content);
+       Processor.writeSegnal(DistFile, content);
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     //Processor pr = new Processor();
@@ -144,7 +147,7 @@ public class TextEditor extends javax.swing.JFrame {
        // pr.dispatch();
        BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader(Processor.readSegnal(Path)));
+            br = new BufferedReader(new FileReader(Processor.readSegnal(DistFile)));
         } catch (FileNotFoundException ex) {
             
             Logger.getLogger(TextEditor.class.getName()).log(Level.SEVERE, null, ex);

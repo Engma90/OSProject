@@ -26,7 +26,7 @@ public class MusicPlayer extends javax.swing.JFrame {
     /**
      * Creates new form MusicPlayer
      */
-    private File sound;
+    public File DistFile;
     private final int BUFFER_SIZE = 64;
     //private File soundFile;
     private AudioInputStream audioStream;
@@ -41,13 +41,13 @@ public class MusicPlayer extends javax.swing.JFrame {
 
         initComponents();
         setAlwaysOnTop(rootPaneCheckingEnabled);
-        sound = Processor.readSegnal(HDD.HDD_LOCATION+"/Disk1/1.wav");
+        DistFile = Processor.readSegnal(HDD.HDD_LOCATION+"/Disk1/1.wav");
     }
 
     public MusicPlayer(String Path) {
         initComponents();
         setAlwaysOnTop(rootPaneCheckingEnabled);
-        this.sound = Processor.readSegnal(Path);
+        this.DistFile = Processor.readSegnal(Path);
     }
 
     
@@ -168,6 +168,7 @@ public class MusicPlayer extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Music Player");
+        setName("MusicPlayer"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -236,12 +237,12 @@ public class MusicPlayer extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
-        playSound(sound);
+        playSound(DistFile);
 
     }//GEN-LAST:event_formWindowOpened
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        playSound(sound);
+        playSound(DistFile);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -263,13 +264,11 @@ public class MusicPlayer extends javax.swing.JFrame {
         Processor.terminate(this);
     }//GEN-LAST:event_formWindowClosed
 
-//    public void play() {
-//        try {
-//            player.play(pausedOnFrame);
-//        } catch (JavaLayerException ex) {
-//            Logger.getLogger(MusicPlayer.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    public String getPath(){
+        return this.DistFile.getAbsolutePath();
+    }
+    
+
     /**
      * @param args the command line arguments
      */

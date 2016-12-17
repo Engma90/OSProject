@@ -184,6 +184,8 @@ public class SystemMonitor extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
+        setName("SystemMonitor"); // NOI18N
+
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

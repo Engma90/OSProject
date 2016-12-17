@@ -79,6 +79,7 @@ public class FileManager extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setName("FileManager"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -171,6 +172,7 @@ public class FileManager extends javax.swing.JFrame {
 
         jTable1.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent me) {
+                try{
                 JTable table = (JTable) me.getSource();
                 Point p = me.getPoint();
                 int row = table.rowAtPoint(p);
@@ -197,6 +199,7 @@ public class FileManager extends javax.swing.JFrame {
                     }
 
                 }
+                }catch(Exception ex){}
             }
         });
 
