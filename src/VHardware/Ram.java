@@ -23,7 +23,7 @@ import javax.swing.JFrame;
  */
 public class Ram {
     
-   public static  JFrame[] ramChip=new JFrame[2];
+   public static  JFrame[] ramChip=new JFrame[5];
     public static  Queue<Integer> ready=new LinkedList<Integer>();
     public static boolean isFull=false;
     //private JFrame []process = {TextEditor};
